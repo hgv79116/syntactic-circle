@@ -1,0 +1,200 @@
+Requirements
+- while
+- for 
+- if elif else
+- . (execute a block of code)
+- f.
+
+Data types:
+  __sc_component {
+    
+  }
+
+Private types:
+  __scprivate_
+  __scprivate_string
+  __scprivate_fn
+
+Input data types
+  __sc_object (base type)
+  
+  __sc_array (inherits)
+  __sc_statement (inherits)
+  __sc_number (inherits)
+
+  __sc_object_sequence (container)
+
+Operators:
+  .: __sc_object_sequence => __cl_object_sequence
+  OR __sc_array => __cl_array
+  OR __sc_assignment => __cl_assignment
+  OR __sc_number: __cl_number
+  
+  ?: 
+
+
+Prepend operator
+Output slicing operator
+
+Output data types
+  __cl_object (base type)
+
+  __cl_array (inherits)
+  __cl_statement (inherits)
+  __cl_number (inherits)
+
+  __cl_object_sequence (container)
+
+~Sc_decl_syntax(
+  name: __scprivate_string,
+  capture_and_generate_cl_array(__sc_im_string) => __cl_array
+)
+
+~Decl_struct 
+
+~Decl_fn executeTranslation [in_stream] => {
+  
+
+~Decl_fn whileTranslation [in_stream] => [
+  in_stream | Sc_capture_square_br > in_stream
+
+  in_stream > Sc_ensure_empty_stream
+]
+
+~Decl_syntax(
+  'while';
+  [in_stream]: 
+   Sc_capture_square_br | Sc_parse_sc_obj  | Sc_gen_cl_obj | Sc_output_cl_obj &
+   Sc_capture_square_ &
+   Sc_ensure_empty_stream
+)
+
+===================
+
+~Decl_syntax @while $
+  while [ %condition% ] {
+    %body%
+  };
+$
+=> $
+  ((
+    %condition%;
+    %__translate_sc_sequence(body)%
+  ));
+$
+
+~Decl_syntax @else_or_null 
+If_match $$ Output $$
+If_match $ 
+  else {
+    %body%
+  }
+$ Output $
+  ((
+    __translate_sc_sequence
+
+=> $
+  ((
+    %condition%;
+    %__translate_sc_sequence(body)%
+  ));
+$
+
+~Decl_syntax @if 
+$
+  if [ %condition% ] {
+    %body%
+  }
+
+$
+=> 
+$
+  ((
+    %condition%;
+    %__translate_sc_sequence(body)%
+  ));
+$,
+
+   
+let condition = Sc_parse_single(Sc_capture_square_br(statement_string_stream))
+let body = Sc_decl_parse(Sc_capture_square_br(statement_string_stream))
+
+// postCapture = 
+
+(( 1, 2, 3 ))
+
+ "1, 2, 3))"
+
+Capture types
+  using __sc_prefix_capture_fn = function<__sc_string(__sc_string);
+  - __sc_regex_capture: function<__sc_capture_fn(__sc_string)> /* string */: base capture type
+  - __sc_curly_bracket_capture: __sc_prefix_capture_fn
+  - __sc_square_bracket_capture: __sc_prefix_capture_fn
+
+TypeParser:
+  - __sc_parse_directive_sequence: function<__sc_directive_list(__sc_string)>
+  - __sc_parse_directive: function<__sc_directive(__sc_string)>
+  - __parse_
+
+
+f{function_name} (args) {
+}
+
+preprocessor data types:
+  
+
+{
+  'directives': [
+    {
+      name: 'while',
+      args: [
+        {
+          name: 
+          capture: 'square_bracket',
+          expects: 'directive_array'
+        }
+        
+    }
+  ]
+}
+
+_sc_directive_decl({
+  name: 'while',
+  
+})
+
+@_decl 
+name: /* name is a reserved key word*/'.', 
+args: /* args is a reserved key word*/[
+  body: ~array_capture(~curly)
+],
+exe: [
+  ~spread(body)
+],
+res: [
+];
+
+
+@while [a = b] {
+  # body
+}
+
+/*
+Example
+@while [a=b] {
+  a = 1;
+  b = 2;
+}
+
+*/
+_sc_decl 'while' [
+      condition: _sc_square_capture(_sc_directive_array) = _sc_square_br() { _sc_ , (expression(~square)),
+      body1: component(~single_capture(~curly))
+      body2: component(~array_capture(~curly))
+],
+. = [
+],
+? = [
+  ~spread(~map(body, subdirective => subdirective.exe));
+]
+
