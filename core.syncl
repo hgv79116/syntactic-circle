@@ -1,0 +1,93 @@
+~Decl_syntax
+
+~Decl_syntax __sc_sequence 
+If_match $
+    
+$
+Output $
+  ((
+    %condition%;
+    %__translate_sequence(body)%
+  ));
+$
+Raise 'No match when parsing __sc_sequence.';
+
+~Decl_syntax __sc_sequence 
+If_match $
+      
+$
+Output $
+  ((
+    %condition%;
+    %__translate_sequence(body)%
+  ));
+$
+Raise 'No match when parsing __sc_sequence.';
+   
+    let condition = Sc_parse_single(Sc_capture_square_br(statement_string_stream))
+    let body = Sc_decl_parse(Sc_capture_square_br(statement_string_stream))
+    
+
+  // postCapture = 
+    
+
+
+(( 1, 2, 3 ))
+
+ "1, 2, 3))"
+
+Capture types
+  using __sc_prefix_capture_fn = function<__sc_string(__sc_string);
+  - __sc_regex_capture: function<__sc_capture_fn(__sc_string)> /* string */: base capture type
+  - __sc_curly_bracket_capture: __sc_prefix_capture_fn
+  - __sc_square_bracket_capture: __sc_prefix_capture_fn
+
+TypeParser:
+  - __sc_parse_directive_sequence: function<__sc_directive_list(__sc_string)>
+  - __sc_parse_directive: function<__sc_directive(__sc_string)>
+  - __parse_
+
+
+f{function_name} (args) {
+}
+
+preprocessor data types:
+  
+
+{
+  'directives': [
+    {
+      name: 'while',
+      args: [
+        {
+          name: 
+          capture: 'square_bracket',
+          expects: 'directive_array'
+        }
+        
+    }
+  ]
+}
+
+_sc_directive_decl({
+  name: 'while',
+  
+})
+
+@_decl 
+name: /* name is a reserved key word*/'.', 
+args: /* args is a reserved key word*/[
+  body: ~array_capture(~curly)
+],
+exe: [
+  ~spread(body)
+],
+res: [
+];
+
+
+@while [a = b] {
+  # body
+}
+
+
